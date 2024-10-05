@@ -1,4 +1,6 @@
 using DadCommerce.Data;
+using DadCommerce.IRepositorys;
+using DadCommerce.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<IComRepository, ComRepository>();
+builder.Services.AddScoped<IEmpRepository, EmployeeRepository>();
+
+builder.Services.AddSingleton<DapperContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
